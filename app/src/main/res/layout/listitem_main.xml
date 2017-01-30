@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:id="@+id/icon_area"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp">
+
+        <ImageView
+            android:id="@+id/image_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/circle" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_folder_white_vector" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_toRightOf="@id/icon_area"
+        android:text="Test"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_primary"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/icon_area"
+        android:text="Test"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
+
+</RelativeLayout>

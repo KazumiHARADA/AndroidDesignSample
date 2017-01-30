@@ -1,0 +1,14 @@
+{
+  "list":[
+    {
+      "title":"BottomSheet",
+      "description":"画面の下端から上にスライド表示されるシート。一時的なモーダル表示、永続的な構造要素を表示する",
+      "activityName":"com.android.kharada.designsample.activity.BottomSheetActivity"
+    },
+    {
+      "title":"Buttons",
+      "description":"ユーザが触れた時にどのような作用が生じるか伝える",
+      "activityName":"ButtonActivity"
+    }
+  ]
+}
