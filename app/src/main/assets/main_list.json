@@ -8,7 +8,7 @@
     {
       "title":"Buttons",
       "description":"ユーザが触れた時にどのような作用が生じるか伝える",
-      "activityName":"ButtonActivity"
+      "activityName":"com.android.kharada.designsample.activity.ButtonActivity"
     }
   ]
 }
