@@ -18,6 +18,32 @@ public class BottomSheetActivity extends ListItemActivity {
     }
 
     @Override
+    protected int getRootViewId() {
+        return R.id.activity_bottom_sheet;
+    }
+
+    @Override
+    protected int getHeaderImageId() {
+        return R.id.backdrop;
+    }
+
+    @Override
+    protected int getToolbarLayoutId() {
+        return R.id.header;
+    }
+
+    @Override
+    protected int getDescriptionId() {
+        return R.id.overview_description;
+    }
+
+    @Override
+    protected int getToolbarId() {
+        return R.id.toolbar;
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 

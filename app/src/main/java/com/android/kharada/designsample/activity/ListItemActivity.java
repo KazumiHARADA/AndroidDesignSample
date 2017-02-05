@@ -35,11 +35,11 @@ public abstract class ListItemActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
         overridePendingTransition(R.anim.do_not_move, R.anim.do_not_move);
 
-        mRootView = (View) findViewById(R.id.activity_bottom_sheet);
-        mHeaderImage = (ImageView) findViewById(R.id.backdrop);
-        mHeader = (CollapsingToolbarLayout) findViewById(R.id.header);
-        mDescriptionText = (TextView) findViewById(R.id.overview_description);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mRootView = (View) findViewById(getRootViewId());
+        mHeaderImage = (ImageView) findViewById(getHeaderImageId());
+        mHeader = (CollapsingToolbarLayout) findViewById(getToolbarLayoutId());
+        mDescriptionText = (TextView) findViewById(getDescriptionId());
+        mToolbar = (Toolbar) findViewById(getToolbarId());
 
         Bundle bundle = getIntent().getExtras();
         mHeader.setTitle(bundle.getString("title", ""));
@@ -87,4 +87,10 @@ public abstract class ListItemActivity extends AppCompatActivity {
     }
 
     protected abstract int getLayoutResId();
+    protected abstract int getRootViewId();
+    protected abstract int getHeaderImageId();
+    protected abstract int getToolbarLayoutId();
+    protected abstract int getDescriptionId();
+    protected abstract int getToolbarId();
+
 }
