@@ -3,11 +3,14 @@ package com.android.kharada.designsample.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,20 +83,37 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
         void onItemClick(MainAdapter adapter, int position, MainItemModel item);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         MainAdapter mAdapter;
 
         final TextView title;
         final TextView description;
         final ImageView icon;
+        final RelativeLayout rootView;
         public ViewHolder(View view, MainAdapter adapter) {
             super(view);
+            rootView = (RelativeLayout) view.findViewById(R.id.item_root_view);
             title = (TextView) view.findViewById(R.id.text_primary);
             description = (TextView) view.findViewById(R.id.text_secondary);
             icon = (ImageView) view.findViewById(R.id.image_icon);
             mAdapter = adapter;
             view.setOnClickListener(this);
+        }
 
+        public TextView getTitle() {
+            return title;
+        }
+
+        public TextView getDescription() {
+            return description;
+        }
+
+        public ImageView getIcon() {
+            return icon;
+        }
+
+        public RelativeLayout getRootView() {
+            return rootView;
         }
 
         @Override
@@ -104,4 +124,5 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
             mAdapter.onClick(v);
         }
     }
+
 }

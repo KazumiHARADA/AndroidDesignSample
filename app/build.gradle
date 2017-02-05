@@ -48,4 +48,6 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.0.1'
 
     testCompile 'junit:junit:4.12'
+
+    compile 'co.trikita:log:1.1.5'
 }
