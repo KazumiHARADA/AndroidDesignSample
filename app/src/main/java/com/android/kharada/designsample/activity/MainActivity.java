@@ -2,6 +2,7 @@ package com.android.kharada.designsample.activity;
 
 import android.content.Intent;
 
+import android.content.res.TypedArray;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,8 @@ import com.android.kharada.designsample.gson.MainListModel;
 import com.android.kharada.designsample.listener.RecyclerItemClickListener;
 import com.android.kharada.designsample.util.AssetUtil;
 import com.google.gson.Gson;
+
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         MainListModel list = gson.fromJson(jsonString, MainListModel.class);
 
+        final TypedArray styledAttributes = getApplicationContext().getTheme().obtainStyledAttributes(
+                new int[] { android.R.attr.actionBarSize });
+        int actionBarSize = (int) styledAttributes.getDimension(0, 0);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
@@ -53,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("description", item.getDescription());
                 intent.putExtra("circle_x",(int)event.getX());
-                intent.putExtra("circle_y",(int)event.getY());
+                intent.putExtra("circle_y",(int)event.getY() + actionBarSize);
                 startActivity(intent);
             } catch (ClassNotFoundException e) {
                 return;
