@@ -1,6 +1,7 @@
 package com.android.kharada.designsample.activity;
 
 import android.animation.Animator;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -21,10 +22,8 @@ import com.android.kharada.designsample.R;
 public abstract class ListItemActivity extends AppCompatActivity {
 
     protected View mRootView;
-    protected CollapsingToolbarLayout mHeader;
-    protected TextView mDescriptionText;
-    protected ImageView mHeaderImage;
     protected Toolbar mToolbar;
+    protected ImageView mHeaderImage;
 
     protected int mCircleX;
     protected int mCircleY;
@@ -36,14 +35,11 @@ public abstract class ListItemActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.do_not_move, R.anim.do_not_move);
 
         mRootView = (View) findViewById(getRootViewId());
-        mHeaderImage = (ImageView) findViewById(getHeaderImageId());
-        mHeader = (CollapsingToolbarLayout) findViewById(getToolbarLayoutId());
-        mDescriptionText = (TextView) findViewById(getDescriptionId());
         mToolbar = (Toolbar) findViewById(getToolbarId());
+        mHeaderImage = (ImageView) findViewById(R.id.backdrop);
+        mHeaderImage.setImageResource(getHeaderImageId());
 
         Bundle bundle = getIntent().getExtras();
-        mHeader.setTitle(bundle.getString("title", ""));
-        mDescriptionText.setText(bundle.getString("description", ""));
         mCircleX = bundle.getInt("circle_x");
         mCircleY = bundle.getInt("circle_y");
 
@@ -88,9 +84,7 @@ public abstract class ListItemActivity extends AppCompatActivity {
 
     protected abstract int getLayoutResId();
     protected abstract int getRootViewId();
-    protected abstract int getHeaderImageId();
-    protected abstract int getToolbarLayoutId();
-    protected abstract int getDescriptionId();
     protected abstract int getToolbarId();
+    protected abstract int getHeaderImageId();
 
 }

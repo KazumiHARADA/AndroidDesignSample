@@ -17,10 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.BottomSheetActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Transparent" />
-        <activity
             android:name=".activity.ButtonActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Transparent" />

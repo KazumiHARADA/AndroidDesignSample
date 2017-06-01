@@ -50,50 +50,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/overview.cardview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/activity_horizontal_margin"
-                app:cardCornerRadius="2dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="24dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="16dp">
-
-                    <TextView
-                        android:id="@+id/overview.title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="概要"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/overview.description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="16dp"
-                        android:text="内容"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
+            android:layout_height="match_parent" />
 
     </android.support.v4.widget.NestedScrollView>
 

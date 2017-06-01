@@ -4,30 +4,38 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.android.kharada.designsample.R;
+import com.android.kharada.designsample.util.ActivityUtil;
 
 /**
  * Created by kharada on 2017/02/22.
  */
 public class ButtonActivity extends ListItemActivity {
-/*
-Activity追加時にすること
-1.ManifestにActivityを追加する。
-<activity
-            android:name=".activity.ButtonActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Transparent" />
-            
-2.assets/main_list.jsonに追記する
-,{
-    "title":"Default",
-    "description":"デフォルトテキスト",
-    "activityName":"com.android.kharada.designsample.activity.ButtonActivity"
-}
-*/
+
+    private ButtonPresenter mButtonPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButtonFragment buttonFragment = (ButtonFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.content_frame);
+
+        if (buttonFragment == null) {
+            buttonFragment = ButtonFragment.newInstance();
+
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(),
+                    buttonFragment, R.id.content_frame);
+        }
+
+        Bundle bundle = getIntent().getExtras();
+
+        mButtonPresenter = new ButtonPresenter(bundle,buttonFragment);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mButtonPresenter.start();
     }
 
     @Override
@@ -41,23 +49,13 @@ Activity追加時にすること
     }
 
     @Override
-    protected int getHeaderImageId() {
-        return R.id.backdrop;
-    }
-
-    @Override
-    protected int getToolbarLayoutId() {
-        return R.id.header;
-    }
-
-    @Override
-    protected int getDescriptionId() {
-        return R.id.overview_description;
-    }
-
-    @Override
     protected int getToolbarId() {
         return R.id.toolbar;
+    }
+
+    @Override
+    protected int getHeaderImageId() {
+        return R.drawable.default_image;
     }
 
 

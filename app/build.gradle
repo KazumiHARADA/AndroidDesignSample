@@ -50,4 +50,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'co.trikita:log:1.1.5'
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
