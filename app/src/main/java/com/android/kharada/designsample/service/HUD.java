@@ -7,14 +7,17 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 
+import com.android.kharada.designsample.R;
+
 public class HUD extends Service {
-    private Button mButton;
+    private View mView;
 
     private WindowManager windowManager;
     boolean touchconsumedbyMove = false;
@@ -38,18 +41,21 @@ public class HUD extends Service {
 
         // dipを取得
         dpScale = (int)getResources().getDisplayMetrics().density;
-
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        mButton = getManualButton();
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+
+        //mButton = getManualButton();
         mParams = getButtonLayout();
 
+        mView = layoutInflater.inflate(R.layout.service_product_tip, null);
+        mView.setOnTouchListener(recButtonOnTouchListener);
+
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-        windowManager.addView(mButton, mParams);
+        windowManager.addView(mView, mParams);
 
         return super.onStartCommand(intent,flags,startId);
     }
@@ -57,10 +63,10 @@ public class HUD extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mButton != null)
+        if(mView != null)
         {
-            ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mButton);
-            mButton = null;
+            ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mView);
+            mView = null;
         }
     }
 
@@ -92,7 +98,7 @@ public class HUD extends Service {
                             prm.x += deltaX;
                             prm.y += deltaY;
                             touchconsumedbyMove = true;
-                            windowManager.updateViewLayout(getManualButton(), prm);
+                            windowManager.updateViewLayout(mView, prm);
                         }
                         else{
                             touchconsumedbyMove = false;
@@ -123,14 +129,14 @@ public class HUD extends Service {
         return mParams;
     }
 
-    private Button getManualButton() {
-        if (mButton != null) {
-            return mButton;
-        }
-        mButton = new Button(this);
-        mButton.setText("Overlay button");
-        mButton.setOnTouchListener(recButtonOnTouchListener);
-
-        return mButton;
-    }
+//    private Button getManualButton() {
+//        if (mButton != null) {
+//            return mButton;
+//        }
+//        mButton = new Button(this);
+//        mButton.setText("Overlay button");
+//        mButton.setOnTouchListener(recButtonOnTouchListener);
+//
+//        return mButton;
+//    }
 }
