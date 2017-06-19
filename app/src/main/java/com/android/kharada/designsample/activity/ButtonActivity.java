@@ -1,83 +1,45 @@
 package com.android.kharada.designsample.activity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.MenuItem;
 
 import com.android.kharada.designsample.R;
+import com.android.kharada.designsample.service.HUD;
 import com.android.kharada.designsample.util.ActivityUtil;
 
 /**
  * Created by kharada on 2017/02/22.
  */
-public class ButtonActivity extends ListItemActivity {
+public class ButtonActivity extends Activity {
 
     private ButtonPresenter mButtonPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButtonFragment buttonFragment = (ButtonFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.content_frame);
 
-        if (buttonFragment == null) {
-            buttonFragment = ButtonFragment.newInstance();
-
-            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(),
-                    buttonFragment, R.id.content_frame);
+        Intent intent = null;
+        if (!canDrawOverlay(getApplicationContext())) {
+            intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${getPackageName()}"));
+            this.startActivity(intent);
+            finish();
+        } else {
+            Intent svc = new Intent(this, HUD.class);
+            startService(svc);
+            finish();
         }
-
-        Bundle bundle = getIntent().getExtras();
-
-        mButtonPresenter = new ButtonPresenter(bundle,buttonFragment);
-
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mButtonPresenter.start();
-    }
-
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.activity_default;
-    }
-
-    @Override
-    protected int getRootViewId() {
-        return R.id.activity_default_root_view;
-    }
-
-    @Override
-    protected int getToolbarId() {
-        return R.id.toolbar;
-    }
-
-    @Override
-    protected int getHeaderImageId() {
-        return R.drawable.default_image;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        boolean result = true;
-
-        switch (id) {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
+    private boolean canDrawOverlay(Context context) {
+        if (Build.VERSION.SDK_INT < 23) {
+            return true;
         }
-
-        return result;
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+        return Settings.canDrawOverlays(context);
     }
 }
